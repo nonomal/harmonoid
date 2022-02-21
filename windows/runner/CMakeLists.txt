@@ -28,10 +28,8 @@ set(MPV_SHARED_LIB "${CMAKE_BINARY_DIR}/mpv-2.dll")
 if (NOT EXISTS "${MPV_SHARED_LIB}")
   file(
     DOWNLOAD
-    "https://api.github.com/repos/alexmercerind/harmonoid-custom-codec/releases/assets/56309670"
+    "https://github.com/alexmercerind/harmonoid-custom-codec/releases/download/0.34.0-196-g4629fe557f/mpv-2.dll"
     "${MPV_SHARED_LIB}"
-    HTTPHEADER "Authorization: token $ENV{ACCESS_TOKEN}"
-    HTTPHEADER "Accept: application/octet-stream"
     SHOW_PROGRESS
   )
 endif()
