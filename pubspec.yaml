@@ -126,13 +126,8 @@ flutter:
 msix_config:
   msix_version: 0.2.0.0
   display_name: Harmonoid
-  identity_name: com.alexmercerind.harmonoid
-  file_extension: ogg, ogx, aac, m4a, mp3, wma, wav, aiff, flac, opus
-  icons_background_color: transparent
-  architecture: x64
-  capabilities: broadFileSystemAccess, musicLibrary
-  vs_generated_images_folder_path: ./windows/msix/assets
   publisher_display_name: Hitesh Kumar Saini
-  publisher: E=github.com/alexmercerind, CN=Hitesh Kumar Saini, OU=com.alexmercerind, O=com.alexmercerind, L=Dehradun, S=Uttarakhand, C=IN
-  certificate_path: ./windows/msix/certificate.pfx
-  store: false
+  identity_name: com.alexmercerind.harmonoid
+  logo_path: ./assets/harmonoid.png
+  file_extension: ogg, ogx, aac, m4a, mp3, wma, wav, aiff, flac, opus
+  capabilities: internetClient, broadFileSystemAccess, musicLibrary
