@@ -124,10 +124,11 @@ flutter:
           weight: 900
 
 msix_config:
-  msix_version: 0.2.0.0
-  display_name: Harmonoid
-  publisher_display_name: Hitesh Kumar Saini
-  identity_name: com.alexmercerind.harmonoid
+  msix_version: 0.0.1.0
+  display_name: Harmonoid-Test
+  publisher_display_name: Kremer Software # Test publisher display name
+  identity_name: 48434KremerSoftware.Harmonoid-Test # Test product identity name
+  publisher: CN=BF257F3F-5644-46DF-8668-014044C1B138 # Test product publisher
   logo_path: ./assets/harmonoid.png
   file_extension: ogg, ogx, aac, m4a, mp3, wma, wav, aiff, flac, opus
   capabilities: internetClient, broadFileSystemAccess, musicLibrary
