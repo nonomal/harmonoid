@@ -2,70 +2,59 @@
 <component type="desktop-application">
 	<id>harmonoid</id>
 	<name>Harmonoid</name>
-	<summary>Elegant music app to play &amp; manage music library. Lyrics &amp; playlists. YouTube support.</summary>
+	<!-- <summary>Plays &amp; manages your music library. Looks beautiful & juicy.</summary> -->
 	<metadata_license>CC0-1.0</metadata_license>
-	<project_license>LicenseRef-proprietary=https://github.com/harmonoid/harmonoid/blob/master/EULA.txt</project_license>
+	<project_license>
+		LicenseRef-proprietary=https://github.com/harmonoid/harmonoid/blob/master/EULA.txt</project_license>
 	<recommends>
 		<control>pointing</control>
 		<control>keyboard</control>
 		<control>touch</control>
 	</recommends>
 	<developer_name>Hitesh Kumar Saini</developer_name>
-	<url type="homepage">https://github.com/harmonoid/harmonoid</url>
-	<url type="donation">https://github.com/harmonoid/harmonoid#support</url>
-	<url type="contact">https://discord.gg/2Rc3edFWd8</url>
+	<!-- <url type="homepage"></url>
+	<url type="donation"></url>
+	<url type="contact"></url>
 	<description>
-		<p>Elegant music app to play &amp; manage music library. Lyrics &amp; playlists. YouTube support.</p>
+		<p>Plays &amp; manages your music library. Looks beautiful & juicy.</p>
 		<p></p>
-		<p>Features</p>
+		<p>Current Features</p>
 		<ul>
-			<li>Powerful music library management based on metadata tags. Indexes music into group of albums &amp; artists.</li>
-			<li>Capable of indexing 20 files/second (on Windows) &amp; saves cache for future app start-ups.</li>
-			<li>Cross-platform (currently aiming Windows, Linux &amp; Android).</li>
-			<li>MPV based music playback for strong format support (on Linux &amp; Windows) using dart:ffi.</li>
-			<li>Taskbar &amp; System Media Transport Controls for Windows.</li>
-			<li>Small installer (&lt; 25 MB) &amp; low RAM usage (&lt; 120 MB).</li>
-			<li>Very strictly follows Material Design guidelines for UI &amp; animations.</li>
-			<li>Ability to create persistent or "Now playing" playlists.</li>
-			<li>Context menu integrations &amp; file associations (exclusive to setup version).</li>
-			<li>Discord RPC integration.</li>
-			<li>D-Bus MPRIS controls for Linux.</li>
+			<li></li>
 		</ul>
 		<p></p>
 		<p>Upcoming Features</p>
 		<ul>
-			<li>Mini-window mode [exclusive to supporters].</li>
-			<li>Minimization to system tray [exclusive to supporters].</li>
-			<li>Music visualizations [exclusive to supporters].</li>
-			<li>Tag editor [exclusive to supporters].</li>
-			<li>Time-synced lyrics [exclusive to supporters].</li>
-			<li>Importing playlists from YouTube &amp; Spotify using Web API.</li>
-			<li>Equalizer.</li>
-			<li>Improvising YouTube support to be close to official web-client.</li>
-			<li>Last.fm scrobbling.</li>
-			<li>Plugin API.</li>
-			<li>Support for remaining macOS &amp; iOS platforms.</li>
-			<li>YOU tell [exclusive to supporters].</li>
+			<li></li>
 		</ul>
 	</description>
 	<screenshots>
 		<screenshot>
-			<image type="source">https://github.com/harmonoid/harmonoid/blob/assets/linux_full/0.jpeg?raw=true</image>
-			<image type="source">https://github.com/harmonoid/harmonoid/blob/assets/linux_full/2.jpeg?raw=true</image>
-			<image type="source">https://github.com/harmonoid/harmonoid/blob/assets/linux_full/1.jpeg?raw=true</image>
-			<image type="source">https://github.com/harmonoid/harmonoid/blob/assets/linux_full/3.jpeg?raw=true</image>
-			<image type="source">https://github.com/harmonoid/harmonoid/blob/assets/linux_full/5.jpg?raw=true</image>
+			<image type="source"></image>
 		</screenshot>
-	</screenshots>
+	</screenshots> -->
 	<launchable type="desktop-id">harmonoid.desktop</launchable>
 	<releases>
-		<release version="0.2.0" date="2022-02-18"/>
-		<release version="0.1.7" date="2021-09-22"/>
-		<release version="0.1.6" date="2021-09-21"/>
-		<release version="0.1.5" date="2021-09-17"/>
-		<release version="0.1.4" date="2021-09-16"/>
-		<release version="0.1.3" date="2021-09-15"/>
+		<release version="0.3.8" date="2023-04-06" />
+		<release version="0.3.7" date="2023-04-04" />
+		<release version="0.3.6" date="2023-03-30" />
+		<release version="0.3.5" date="2023-01-05" />
+		<release version="0.3.4" date="2022-11-16" />
+		<release version="0.3.3" date="2022-09-21" />
+		<release version="0.3.2" date="2022-09-19" />
+		<release version="0.3.1" date="2022-09-19" />
+		<release version="0.3.0" date="2022-09-04" />
+		<release version="0.2.9" date="2022-08-30" />
+		<release version="0.2.6" date="2022-07-17" />
+		<release version="0.2.5" date="2022-07-13" />
+		<release version="0.2.2" date="2022-03-24" />
+		<release version="0.2.1" date="2022-02-18" />
+		<release version="0.1.7" date="2021-09-22" />
+		<release version="0.1.6" date="2021-09-21" />
+		<release version="0.1.5" date="2021-09-17" />
+		<release version="0.1.4" date="2021-09-16" />
+		<release version="0.1.3" date="2021-09-15" />
 	</releases>
 	<content_rating type="oars-1.0" />
-	<update_contact>saini123hitesh@gmail.com</update_contact>
+	<update_contact>alexmercerind@gmail.com</update_contact>
 </component>

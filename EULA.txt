@@ -27,7 +27,7 @@ The SOFTWARE PRODUCT is protected by copyright laws and international copyright 
    (f) Compliance with Applicable Laws.
    You must comply with all applicable laws regarding use of the SOFTWARE PRODUCT.
    (g) Source code.
-   You may only compile and modify the source code of the SOFTWARE PRODUCT for your own personal purpose or to propose a contribution to the SOFTWARE PRODUCT after removing refrences to all proprietary modules used within Harmonoid.
+   You may compile and modify the source code of the SOFTWARE PRODUCT for your own personal purpose or to propose a contribution to the SOFTWARE PRODUCT.
 
 3. TERMINATION
    Without prejudice to any other rights, the Licensor may terminate this EULA if you fail to comply with the terms and conditions of this EULA. In such event, you must destroy all copies of the SOFTWARE PRODUCT in your possession.

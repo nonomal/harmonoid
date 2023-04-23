@@ -6,18 +6,24 @@
 
 #include "generated_plugin_registrant.h"
 
-#include <bitsdojo_window_windows/bitsdojo_window_plugin.h>
+#include <awesome_notifications/awesome_notifications_plugin_c_api.h>
 #include <dart_discord_rpc/dart_discord_rpc_plugin.h>
-#include <url_launcher_windows/url_launcher_plugin.h>
+#include <flutter_platform_alert/flutter_platform_alert_plugin.h>
+#include <url_launcher_windows/url_launcher_windows.h>
+#include <window_plus/window_plus_plugin_c_api.h>
 #include <windows_taskbar/windows_taskbar_plugin.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
-  BitsdojoWindowPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("BitsdojoWindowPlugin"));
+  AwesomeNotificationsPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("AwesomeNotificationsPluginCApi"));
   DartDiscordRpcPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("DartDiscordRpcPlugin"));
-  UrlLauncherPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("UrlLauncherPlugin"));
+  FlutterPlatformAlertPluginRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("FlutterPlatformAlertPlugin"));
+  UrlLauncherWindowsRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("UrlLauncherWindows"));
+  WindowPlusPluginCApiRegisterWithRegistrar(
+      registry->GetRegistrarForPlugin("WindowPlusPluginCApi"));
   WindowsTaskbarPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("WindowsTaskbarPlugin"));
 }

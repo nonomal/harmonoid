@@ -1,6 +1,6 @@
 /// This file is a part of Harmonoid (https://github.com/harmonoid/harmonoid).
 ///
-/// Copyright © 2020-2022, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
+/// Copyright © 2020 & onwards, Hitesh Kumar Saini <saini123hitesh@gmail.com>.
 /// All rights reserved.
 ///
 /// Use of this source code is governed by the End-User License Agreement for Harmonoid that can be found in the EULA.txt file.
@@ -28,32 +28,29 @@ class CollectionRefresh extends ChangeNotifier {
   /// [CollectionRefresh] object instance.
   static late CollectionRefresh instance = CollectionRefresh();
 
-  int progress = 0;
+  int? progress = 1;
   int total = 1;
 
-  double get relativeProgress => progress / total;
-  bool get isOngoing => progress != total;
-  bool get isCompleted => progress == total;
+  bool get completed => progress == total;
 
-  void set(int progress, int total) {
+  void set(int? progress, int total) {
     this.progress = progress;
     this.total = total;
-    if (this._timer == null) {
-      this.notifyListeners();
+    if (_timer == null) {
+      notifyListeners();
       Collection.instance.redraw();
-      this._timer = Timer.periodic(
+      _timer = Timer.periodic(
         kCollectionRedrawRefractoryPeriod,
         (_) {
-          this.notifyListeners();
+          notifyListeners();
           Collection.instance.redraw();
         },
       );
     }
-    if (this.progress == this.total) {
-      this.notifyListeners();
-      Collection.instance.redraw();
-      this._timer?.cancel();
-      this._timer = null;
+    if (progress == total) {
+      notifyListeners();
+      _timer?.cancel();
+      _timer = null;
     }
   }
 
@@ -65,4 +62,4 @@ class CollectionRefresh extends ChangeNotifier {
 }
 
 /// Amount of time after which [Collection] should be redrawn if it is being indexed or refreshed.
-const kCollectionRedrawRefractoryPeriod = Duration(seconds: 1);
+const kCollectionRedrawRefractoryPeriod = Duration(seconds: 2);

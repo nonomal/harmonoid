@@ -6,8 +6,6 @@
 
 namespace {
 
-constexpr const wchar_t kWindowClassName[] = L"FLUTTER_RUNNER_WIN32_WINDOW";
-
 // The number of Win32Window objects that currently exist.
 static int g_active_window_count = 0;
 
@@ -22,16 +20,16 @@ int Scale(int source, double scale_factor) {
 // Dynamically loads the |EnableNonClientDpiScaling| from the User32 module.
 // This API is only needed for PerMonitor V1 awareness mode.
 void EnableFullDpiSupportIfAvailable(HWND hwnd) {
-  HMODULE user32_module = LoadLibraryA("User32.dll");
+  HMODULE user32_module = ::LoadLibraryA("User32.dll");
   if (!user32_module) {
     return;
   }
   auto enable_non_client_dpi_scaling =
       reinterpret_cast<EnableNonClientDpiScaling*>(
-          GetProcAddress(user32_module, "EnableNonClientDpiScaling"));
+          ::GetProcAddress(user32_module, "EnableNonClientDpiScaling"));
   if (enable_non_client_dpi_scaling != nullptr) {
     enable_non_client_dpi_scaling(hwnd);
-    FreeLibrary(user32_module);
+    ::FreeLibrary(user32_module);
   }
 }
 
@@ -93,17 +91,14 @@ void WindowClassRegistrar::UnregisterWindowClass() {
   class_registered_ = false;
 }
 
-Win32Window::Win32Window() {
-  ++g_active_window_count;
-}
+Win32Window::Win32Window() { ++g_active_window_count; }
 
 Win32Window::~Win32Window() {
   --g_active_window_count;
   Destroy();
 }
 
-bool Win32Window::CreateAndShow(const std::wstring& title,
-                                const Point& origin,
+bool Win32Window::CreateAndShow(const std::wstring& title, const Point& origin,
                                 const Size& size) {
   Destroy();
 
@@ -112,12 +107,12 @@ bool Win32Window::CreateAndShow(const std::wstring& title,
 
   const POINT target_point = {static_cast<LONG>(origin.x),
                               static_cast<LONG>(origin.y)};
-  HMONITOR monitor = MonitorFromPoint(target_point, MONITOR_DEFAULTTONEAREST);
+  HMONITOR monitor = ::MonitorFromPoint(target_point, MONITOR_DEFAULTTONEAREST);
   UINT dpi = FlutterDesktopGetDpiForMonitor(monitor);
   double scale_factor = dpi / 96.0;
 
   HWND window = CreateWindow(
-      window_class, title.c_str(), WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+      window_class, title.c_str(), WS_OVERLAPPEDWINDOW,
       Scale(origin.x, scale_factor), Scale(origin.y, scale_factor),
       Scale(size.width, scale_factor), Scale(size.height, scale_factor),
       nullptr, nullptr, GetModuleHandle(nullptr), this);
@@ -130,8 +125,7 @@ bool Win32Window::CreateAndShow(const std::wstring& title,
 }
 
 // static
-LRESULT CALLBACK Win32Window::WndProc(HWND const window,
-                                      UINT const message,
+LRESULT CALLBACK Win32Window::WndProc(HWND const window, UINT const message,
                                       WPARAM const wparam,
                                       LPARAM const lparam) noexcept {
   if (message == WM_NCCREATE) {
@@ -150,44 +144,32 @@ LRESULT CALLBACK Win32Window::WndProc(HWND const window,
 }
 
 LRESULT
-Win32Window::MessageHandler(HWND hwnd,
-                            UINT const message,
-                            WPARAM const wparam,
+Win32Window::MessageHandler(HWND hwnd, UINT const message, WPARAM const wparam,
                             LPARAM const lparam) noexcept {
   switch (message) {
-    case WM_DESTROY:
+    case WM_DESTROY: {
       window_handle_ = nullptr;
       Destroy();
       if (quit_on_close_) {
-        PostQuitMessage(0);
+        ::PostQuitMessage(0);
       }
       return 0;
-
+    }
     case WM_DPICHANGED: {
       auto newRectSize = reinterpret_cast<RECT*>(lparam);
       LONG newWidth = newRectSize->right - newRectSize->left;
       LONG newHeight = newRectSize->bottom - newRectSize->top;
-
-      SetWindowPos(hwnd, nullptr, newRectSize->left, newRectSize->top, newWidth,
-                   newHeight, SWP_NOZORDER | SWP_NOACTIVATE);
+      ::SetWindowPos(hwnd, nullptr, newRectSize->left, newRectSize->top,
+                     newWidth, newHeight, SWP_NOZORDER | SWP_NOACTIVATE);
 
       return 0;
     }
-    case WM_SIZE: {
-      RECT rect = GetClientArea();
+    case WM_ACTIVATE: {
       if (child_content_ != nullptr) {
-        // Size and position the child window.
-        MoveWindow(child_content_, rect.left, rect.top, rect.right - rect.left,
-                   rect.bottom - rect.top, TRUE);
+        ::SetFocus(child_content_);
       }
       return 0;
     }
-
-    case WM_ACTIVATE:
-      if (child_content_ != nullptr) {
-        SetFocus(child_content_);
-      }
-      return 0;
   }
 
   return DefWindowProc(window_handle_, message, wparam, lparam);
@@ -195,9 +177,8 @@ Win32Window::MessageHandler(HWND hwnd,
 
 void Win32Window::Destroy() {
   OnDestroy();
-
   if (window_handle_) {
-    DestroyWindow(window_handle_);
+    ::DestroyWindow(window_handle_);
     window_handle_ = nullptr;
   }
   if (g_active_window_count == 0) {
@@ -212,24 +193,20 @@ Win32Window* Win32Window::GetThisFromHandle(HWND const window) noexcept {
 
 void Win32Window::SetChildContent(HWND content) {
   child_content_ = content;
-  SetParent(content, window_handle_);
+  ::SetParent(content, window_handle_);
   RECT frame = GetClientArea();
-
-  MoveWindow(content, frame.left, frame.top, frame.right - frame.left,
-             frame.bottom - frame.top, true);
-
-  SetFocus(child_content_);
+  ::MoveWindow(content, frame.left, frame.top, frame.right - frame.left,
+               frame.bottom - frame.top, true);
+  ::SetFocus(child_content_);
 }
 
 RECT Win32Window::GetClientArea() {
   RECT frame;
-  GetClientRect(window_handle_, &frame);
+  ::GetClientRect(window_handle_, &frame);
   return frame;
 }
 
-HWND Win32Window::GetHandle() {
-  return window_handle_;
-}
+HWND Win32Window::GetHandle() { return window_handle_; }
 
 void Win32Window::SetQuitOnClose(bool quit_on_close) {
   quit_on_close_ = quit_on_close;
